@@ -81,6 +81,7 @@
         state.user = user;
         $('#loginView').classList.add('hidden');
         $('#appView').classList.remove('hidden');
+        $('#btnFabNew').classList.remove('hidden');
         $('#currentUserBadge').textContent = `${user.rank_name}`;
 
         const canManageUsers = ['admin', 'supervisor'].includes(user.role);
@@ -95,6 +96,7 @@
     function setUnauthenticated() {
         state.user = null;
         $('#appView').classList.add('hidden');
+        $('#btnFabNew').classList.add('hidden');
         $('#loginView').classList.remove('hidden');
     }
 
@@ -496,15 +498,23 @@
 
         // Filtros do Livro
         let searchTimer;
-        $('#filterSearch').addEventListener('input', () => {
+        const syncSearch = (val) => {
+            $('#filterSearch').value = val;
+            $('#filterSearchMobile').value = val;
             clearTimeout(searchTimer);
             searchTimer = setTimeout(loadOccurrences, 250);
+        };
+        $('#filterSearch').addEventListener('input', (e) => syncSearch(e.target.value));
+        $('#filterSearchMobile').addEventListener('input', (e) => syncSearch(e.target.value));
+        $('#btnToggleFilters').addEventListener('click', () => {
+            $('#filterRow').classList.toggle('mobile-open');
         });
         ['filterStatus', 'filterSeverity', 'filterLocalidade', 'filterDateFrom', 'filterDateTo'].forEach((id) => {
             $(`#${id}`).addEventListener('change', loadOccurrences);
         });
         $('#btnClearFilters').addEventListener('click', () => {
             $('#filterSearch').value = '';
+            $('#filterSearchMobile').value = '';
             $('#filterStatus').value = 'todas';
             $('#filterSeverity').value = 'todas';
             $('#filterLocalidade').value = 'todas';
@@ -513,15 +523,17 @@
             loadOccurrences();
         });
 
-        // Nova Ocorrência
-        $('#btnNewOccurrence').addEventListener('click', () => {
+        // Nova Ocorrência (Desktop + FAB Mobile)
+        const openNewOccModal = () => {
             $('#formNewOcc').reset();
             $('#newOpenedAt').value = localDatetimeInputNow();
             $('#newSeveridade').value = 'media';
             $('#newStatus').value = 'aberta';
             $('#newOccError').classList.add('hidden');
             openModal('modalNewOcc');
-        });
+        };
+        $('#btnNewOccurrence').addEventListener('click', openNewOccModal);
+        $('#btnFabNew').addEventListener('click', openNewOccModal);
 
         $('#formNewOcc').addEventListener('submit', async (e) => {
             e.preventDefault();

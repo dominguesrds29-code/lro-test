@@ -7,7 +7,10 @@ $user = current_user();
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#0b1b34">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
     <title>LRO-ST | Livro de Registro de Ocorrências — DTCEA-SJ</title>
     <link rel="stylesheet" href="assets/css/app.css">
 </head>
@@ -100,7 +103,11 @@ $user = current_user();
                 </div>
 
                 <div class="card filter-card">
-                    <div class="filter-row">
+                    <div class="filter-mobile-bar">
+                        <input type="search" id="filterSearchMobile" class="filter-mobile-search" placeholder="Buscar LRO, ticket, local...">
+                        <button type="button" id="btnToggleFilters" class="btn btn-outline btn-sm">⚙️ Filtros</button>
+                    </div>
+                    <div id="filterRow" class="filter-row">
                         <div class="filter-field filter-search">
                             <label for="filterSearch">Buscar</label>
                             <input type="search" id="filterSearch" placeholder="Código LRO, Ticket Embratel, localidade, frequência, descrição...">
@@ -469,6 +476,9 @@ $user = current_user();
     <datalist id="dlOperadoras"></datalist>
 
     <div id="toast" class="toast hidden"></div>
+
+    <!-- BOTÃO FLUTUANTE MOBILE (+ NOVA OCORRÊNCIA) -->
+    <button type="button" id="btnFabNew" class="fab-new hidden" aria-label="Nova Ocorrência" title="Nova Ocorrência">+</button>
 
     <script src="assets/js/app.js"></script>
 </body>
