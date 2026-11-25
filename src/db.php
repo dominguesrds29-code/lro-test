@@ -109,22 +109,21 @@ function seed_initial_data(PDO $pdo): void
     $now = date('Y-m-d H:i:s');
     $defaultHash = password_hash('dtceasj', PASSWORD_DEFAULT);
 
-    // 14 membros da Seção Técnica (ST) do DTCEA-SJ
+    // 13 membros da Seção Técnica (ST) do DTCEA-SJ
     $users = [
-        ['glaudio',    'Ten Gláudio',     '1º Ten Gláudio (Chefe ST)',      'supervisor', 'Chefia ST'],
-        ['ramos',      '2S Ramos',        '2º Sgt Ramos',                   'tecnico',    'Telecomunicações / Rádio'],
-        ['sobreaviso', 'Sobreaviso SELT', 'Equipe de Sobreaviso SELT',      'tecnico',    'Sobreaviso Operacional'],
-        ['silva',      '1S Silva',        '1º Sgt Silva',                   'admin',      'Administrador LRO / ST'],
-        ['oliveira',   '2S Oliveira',     '2º Sgt Oliveira',                'tecnico',    'Rádio / VHF-UHF'],
-        ['santos',     '2S Santos',       '2º Sgt Santos',                  'tecnico',    'Redes / MPLS'],
-        ['costa',      '3S Costa',        '3º Sgt Costa',                   'tecnico',    'Auxílios à Navegação'],
-        ['pereira',    '3S Pereira',      '3º Sgt Pereira',                 'tecnico',    'Energia / Climatização'],
-        ['almeida',    '3S Almeida',      '3º Sgt Almeida',                 'tecnico',    'Radar / Vigilância'],
-        ['ferreira',   '3S Ferreira',     '3º Sgt Ferreira',                'tecnico',    'Telecomunicações'],
-        ['souza',      '3S Souza',        '3º Sgt Souza',                   'tecnico',    'Sistemas Digitais'],
-        ['lima',       'CB Lima',         'Cb Lima',                        'tecnico',    'Infraestrutura / Energia'],
-        ['rocha',      'CB Rocha',        'Cb Rocha',                       'tecnico',    'Suporte Técnico ST'],
-        ['mendes',     '2S Mendes',       '2º Sgt Mendes',                  'tecnico',    'Comunicações / MARC'],
+        ['glaudio',    'Ten. Gláudio',     '1º Ten Gláudio (Chefe ST)', 'supervisor', 'Chefia ST'],
+        ['domingues',  'SO Domingues',     'Suboficial Domingues',      'admin',      'Administrador LRO / ST'],
+        ['alex',       'SO Alex',          'Suboficial Alex',           'tecnico',    'Seção Técnica'],
+        ['michely',    'SO Michely',       'Suboficial Michely',        'tecnico',    'Seção Técnica'],
+        ['pereira',    'SO Pereira',       'Suboficial Pereira',        'tecnico',    'Seção Técnica'],
+        ['claudionor', 'SO R1 Claudionor', 'SO R1 Claudionor',          'tecnico',    'Seção Técnica'],
+        ['ramos1',     '1S Ramos',         '1º Sgt Ramos',              'tecnico',    'Seção Técnica'],
+        ['bruno',      '1S Bruno Silva',   '1º Sgt Bruno Silva',        'tecnico',    'Seção Técnica'],
+        ['bianca',     '1S Bianca',        '1º Sgt Bianca',             'tecnico',    'Seção Técnica'],
+        ['nogueira',   '1S Nogueira',      '1º Sgt Nogueira',           'tecnico',    'Seção Técnica'],
+        ['ramos',      '2S Ramos',         '2º Sgt Ramos',              'tecnico',    'Seção Técnica'],
+        ['marrani',    '2S Marrani',       '2º Sgt Marrani',            'tecnico',    'Seção Técnica'],
+        ['anaflavia',  '2S Ana Flávia',    '2º Sgt Ana Flávia',         'tecnico',    'Seção Técnica'],
     ];
 
     $stmtUser = $pdo->prepare(
@@ -193,12 +192,12 @@ function seed_initial_data(PDO $pdo): void
             'aguardando_terceiros', '2026-10-18 20:09:00'
         ],
         [
-            $userIds['sobreaviso'], 'Sobreaviso SELT', 'restabelecimento_parcial',
+            $userIds['alex'], 'SO Alex', 'restabelecimento_parcial',
             "O link foi restabelecido agora:\n- MPLS A: OK (operacional)\n- MPLS B: OK (operacional)\n- Frequência 120,850 MHz (120@85): OK\n- Frequência 119,375 MHz (119@375): OFF (permanece inoperante)",
             'em_acompanhamento', '2026-10-18 21:26:00'
         ],
         [
-            $userIds['glaudio'], 'Ten Gláudio', 'despacho',
+            $userIds['glaudio'], 'Ten. Gláudio', 'despacho',
             "Formalizado Ticket nº 10939457 junto à Embratel referente à indisponibilidade total do Link A MPLS. Pelo Link B MPLS permanecem indisponíveis as frequências 119,375 MHz e 120,850 MHz (operando por meio analógico). A Embratel aguarda agendamento de visita técnica a Salesópolis.\nSolicitado acionamento para a EACEA-HSA em 19 OUT 2026 para verificação das condições operacionais e adoção das providências cabíveis.",
             'aguardando_terceiros', '2026-10-18 21:30:00'
         ],
@@ -235,7 +234,7 @@ function seed_initial_data(PDO $pdo): void
     $occ2Id = (int)$pdo->lastInsertId();
 
     $stmtUpd->execute([
-        ':oid' => $occ2Id, ':uid' => $userIds['lima'], ':author' => 'CB Lima',
+        ':oid' => $occ2Id, ':uid' => $userIds['domingues'], ':author' => 'SO Domingues',
         ':type' => 'encerramento',
         ':msg' => 'Substituído módulo retificador reserva e normalizado barramento -48VCC. Sistema testado em carga por 30 minutos sem novos alarmes.',
         ':st' => 'resolvida', ':eat' => '2026-11-12 11:40:00', ':cat' => '2026-11-12 11:40:00',
@@ -257,14 +256,14 @@ function seed_initial_data(PDO $pdo): void
         ':imp' => 'Operação normal pelo enlace principal; redundância degradada.',
         ':opened' => '2026-11-23 14:20:00',
         ':closed' => null,
-        ':by' => $userIds['santos'],
+        ':by' => $userIds['nogueira'],
         ':cat' => '2026-11-23 14:20:00',
         ':uat' => '2026-11-24 08:10:00',
     ]);
     $occ3Id = (int)$pdo->lastInsertId();
 
     $stmtUpd->execute([
-        ':oid' => $occ3Id, ':uid' => $userIds['santos'], ':author' => '2S Santos',
+        ':oid' => $occ3Id, ':uid' => $userIds['nogueira'], ':author' => '1S Nogueira',
         ':type' => 'atualizacao',
         ':msg' => 'Operadora informou limpeza de conector óptico no POP regional. Monitorando estabilidade por 48h antes do encerramento.',
         ':st' => 'em_acompanhamento', ':eat' => '2026-11-24 08:10:00', ':cat' => '2026-11-24 08:10:00',
