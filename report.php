@@ -343,7 +343,6 @@ $csvUrl = 'report.php?' . http_build_query($filters + ['format' => 'csv']);
                 <div class="org-line">MINISTÉRIO DA DEFESA • COMANDO DA AERONÁUTICA • DECEA</div>
                 <div class="unit-line">DESTACAMENTO DE CONTROLE DO ESPAÇO AÉREO DE SÃO JOSÉ DOS CAMPOS (DTCEA-SJ)</div>
                 <div class="doc-title">Relatório do Livro de Registro de Ocorrências — Seção Técnica (LRO-ST)</div>
-                <div class="doc-subtitle">Evidência Técnica Consolidada para Anexação ao SIGADAER e Auditorias Operacionais</div>
             </div>
             <div class="doc-meta-grid">
                 <div><strong>Período Apurado:</strong> <?= $esc($fmtDateBr($filters['date_from'])) ?> a <?= $esc($fmtDateBr($filters['date_to'])) ?></div>
