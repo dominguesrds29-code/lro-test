@@ -1,0 +1,10 @@
+# Banco de dados SQLite local (criado automaticamente pelo src/db.php)
+database/*.sqlite
+database/*.sqlite-wal
+database/*.sqlite-shm
+database/*.db
+
+# Logs e arquivos temporários
+*.log
+.DS_Store
+Thumbs.db
