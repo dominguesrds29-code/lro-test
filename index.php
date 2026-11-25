@@ -238,34 +238,19 @@ $user = current_user();
         </main>
     </div>
 
-    <!-- MODAL: NOVA OCORRÊNCIA -->
+    <!-- MODAL: NOVA OCORRÊNCIA (OBJETIVO) -->
     <div id="modalNewOcc" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modalNewOccTitle">
         <div class="modal-backdrop"></div>
         <div class="modal-dialog modal-lg">
             <div class="modal-header">
-                <h2 id="modalNewOccTitle">Novo Lançamento de Ocorrência Técnica</h2>
+                <h2 id="modalNewOccTitle">Novo Registro no Livro</h2>
                 <button type="button" class="modal-close" data-close="modalNewOcc">&times;</button>
             </div>
             <form id="formNewOcc" class="modal-body">
                 <div class="form-grid-2">
                     <div class="form-group span-2">
-                        <label for="newTitle">Título / Resumo da Ocorrência *</label>
-                        <input type="text" id="newTitle" required placeholder="Ex: Indisponibilidade Link A MPLS e frequências VHF em Salesópolis">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="newOpenedAt">Data e Hora do Evento *</label>
-                        <input type="datetime-local" id="newOpenedAt" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="newSeveridade">Severidade / Impacto *</label>
-                        <select id="newSeveridade" required>
-                            <option value="critica">Crítica (Indisponibilidade Total)</option>
-                            <option value="alta">Alta (Degradação Severa)</option>
-                            <option value="media" selected>Média (Contingência / Parcial)</option>
-                            <option value="baixa">Baixa / Informativo</option>
-                        </select>
+                        <label for="newTitle">Assunto / Título Curto *</label>
+                        <input type="text" id="newTitle" required placeholder="Ex: Indisponibilidade Link A MPLS e 120,850 MHz — Salesópolis">
                     </div>
 
                     <div class="form-group">
@@ -274,48 +259,43 @@ $user = current_user();
                     </div>
 
                     <div class="form-group">
-                        <label for="newCentro">Centro / Órgão / Estação</label>
-                        <input type="text" id="newCentro" placeholder="Ex: EACEA-HSA_A">
+                        <label for="newSistema">Sistema / Centro *</label>
+                        <input type="text" id="newSistema" list="dlSistemas" required placeholder="Ex: MPLS / VHF (EACEA-HSA_A)">
                     </div>
 
                     <div class="form-group">
-                        <label for="newSistema">Sistema / Equipamento *</label>
-                        <input type="text" id="newSistema" list="dlSistemas" required placeholder="Ex: MPLS / VHF (MARC / ICCB)">
+                        <label for="newTicket">Ticket / OS (se houver)</label>
+                        <input type="text" id="newTicket" placeholder="Ex: 10939457 (Embratel)">
                     </div>
 
                     <div class="form-group">
-                        <label for="newStatus">Status Inicial</label>
-                        <select id="newStatus">
-                            <option value="aberta">Aberta</option>
-                            <option value="em_acompanhamento">Em Acompanhamento</option>
-                            <option value="aguardando_terceiros">Aguardando Terceiros (Operadora)</option>
-                            <option value="resolvida">Resolvida / Encerrada</option>
+                        <label for="newOpenedAt">Data e Hora *</label>
+                        <input type="datetime-local" id="newOpenedAt" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="newSeveridade">Impacto / Severidade *</label>
+                        <select id="newSeveridade" required>
+                            <option value="critica">Crítica (Indisponibilidade)</option>
+                            <option value="alta">Alta (Degradação)</option>
+                            <option value="media" selected>Média (Contingência)</option>
+                            <option value="baixa">Baixa / Informativo</option>
                         </select>
                     </div>
 
                     <div class="form-group">
-                        <label for="newTicket">Ticket Externo / Nº OS</label>
-                        <input type="text" id="newTicket" placeholder="Ex: 10939457">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="newOperadora">Operadora / Responsável Externo</label>
-                        <input type="text" id="newOperadora" list="dlOperadoras" placeholder="Ex: Embratel, Telebras, Interno ST">
-                    </div>
-
-                    <div class="form-group span-2">
-                        <label for="newDescricao">Descrição Técnica da Ocorrência *</label>
-                        <textarea id="newDescricao" rows="4" required placeholder="Descreva os sintomas, frequências/links afetados, alarmes observados..."></textarea>
+                        <label for="newStatus">Status *</label>
+                        <select id="newStatus">
+                            <option value="aberta">Aberta</option>
+                            <option value="em_acompanhamento">Em Acompanhamento</option>
+                            <option value="aguardando_terceiros">Aguardando Terceiros</option>
+                            <option value="resolvida">Resolvida / Encerrada</option>
+                        </select>
                     </div>
 
                     <div class="form-group span-2">
-                        <label for="newAcoes">Ações Preliminares / Testes Já Realizados</label>
-                        <textarea id="newAcoes" rows="3" placeholder="Ex: Resetados rádios no MARC, realizado START/STOP nas frequências, comutada ICCB..."></textarea>
-                    </div>
-
-                    <div class="form-group span-2">
-                        <label for="newImpacto">Impacto Operacional / Contingência Adotada</label>
-                        <input type="text" id="newImpacto" placeholder="Ex: Frequências operando em modo analógico">
+                        <label for="newDescricao">Relato Objetivo (o que ocorreu e providências já tomadas) *</label>
+                        <textarea id="newDescricao" rows="5" required placeholder="Ex: Link A MPLS inoperante. 119@375 já off e 120@85 caiu hoje; operando na analógica. Resetados rádios no MARC, START/STOP e comutada ICCB sem sucesso."></textarea>
                     </div>
                 </div>
 
@@ -323,7 +303,7 @@ $user = current_user();
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-ghost" data-close="modalNewOcc">Cancelar</button>
-                    <button type="submit" class="btn btn-primary">Registrar no Livro</button>
+                    <button type="submit" class="btn btn-primary">Registrar Ocorrência</button>
                 </div>
             </form>
         </div>
@@ -332,7 +312,7 @@ $user = current_user();
     <!-- MODAL: DETALHE E LINHA DO TEMPO DA OCORRÊNCIA -->
     <div id="modalDetail" class="modal hidden" role="dialog" aria-modal="true">
         <div class="modal-backdrop"></div>
-        <div class="modal-dialog modal-xl">
+        <div class="modal-dialog modal-lg">
             <div class="modal-header">
                 <div>
                     <span id="detCode" class="badge badge-code"></span>
@@ -341,69 +321,60 @@ $user = current_user();
                     <h2 id="detTitle" style="margin-top: 6px;"></h2>
                 </div>
                 <div style="display:flex; gap:8px; align-items:center;">
-                    <button type="button" id="btnCopyWhatsapp" class="btn btn-outline btn-sm" title="Copiar resumo formatado para WhatsApp">📋 Copiar p/ WhatsApp</button>
+                    <button type="button" id="btnCopyWhatsapp" class="btn btn-outline btn-sm" title="Copiar resumo para WhatsApp">📋 Copiar</button>
                     <button type="button" class="modal-close" data-close="modalDetail">&times;</button>
                 </div>
             </div>
             <div class="modal-body">
-                <div id="detMetaGrid" class="detail-meta-grid"></div>
+                <div id="detMetaGrid" class="detail-meta-compact"></div>
 
                 <div class="detail-section">
-                    <h4>Descrição Técnica Inicial</h4>
+                    <h4>Relato Técnico</h4>
                     <div id="detDescricao" class="detail-text-box"></div>
                 </div>
 
-                <div class="detail-grid-2">
-                    <div class="detail-section">
-                        <h4>Ações Preliminares / Testes Realizados</h4>
-                        <div id="detAcoes" class="detail-text-box"></div>
-                    </div>
-                    <div class="detail-section">
-                        <h4>Impacto Operacional / Contingência</h4>
-                        <div id="detImpacto" class="detail-text-box"></div>
-                    </div>
+                <div id="detExtraWrap" class="detail-section hidden">
+                    <h4>Ações Preliminares / Impacto</h4>
+                    <div id="detAcoes" class="detail-text-box"></div>
                 </div>
 
                 <div class="detail-section">
-                    <h4>Histórico de Andamento e Despachos (Trilha de Auditoria)</h4>
+                    <h4>Andamento</h4>
                     <div id="detTimeline" class="timeline"></div>
                 </div>
 
                 <div class="detail-section update-box">
-                    <h4>Registrar Nova Atualização / Despacho / Encerramento</h4>
+                    <h4>Adicionar Atualização / Encerrar</h4>
                     <form id="formAddUpdate" class="form-grid-2">
                         <input type="hidden" id="updOccId">
                         <div class="form-group">
-                            <label for="updType">Tipo de Registro</label>
+                            <label for="updType">Tipo</label>
                             <select id="updType">
                                 <option value="atualizacao">Atualização Técnica</option>
-                                <option value="contato_operadora">Contato Operadora / Terceiro</option>
+                                <option value="contato_operadora">Contato Operadora</option>
                                 <option value="restabelecimento_parcial">Restabelecimento Parcial</option>
                                 <option value="despacho">Despacho / Acionamento</option>
-                                <option value="encerramento">Encerramento / Restabelecimento Total</option>
+                                <option value="encerramento">Encerramento (Restabelecido)</option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="updStatusAfter">Alterar Status para</label>
+                            <label for="updStatusAfter">Novo Status</label>
                             <select id="updStatusAfter">
-                                <option value="">(Manter status atual)</option>
+                                <option value="">(Manter atual)</option>
                                 <option value="aberta">Aberta</option>
                                 <option value="em_acompanhamento">Em Acompanhamento</option>
                                 <option value="aguardando_terceiros">Aguardando Terceiros</option>
                                 <option value="resolvida">Resolvida / Encerrada</option>
                             </select>
                         </div>
-                        <div class="form-group">
-                            <label for="updEventAt">Data / Hora do Evento</label>
-                            <input type="datetime-local" id="updEventAt">
-                        </div>
                         <div class="form-group span-2">
-                            <label for="updMessage">Descrição da Atualização / Providência *</label>
-                            <textarea id="updMessage" rows="3" required placeholder="Descreva o andamento, retorno da operadora, testes realizados ou solução aplicada..."></textarea>
+                            <label for="updMessage">Mensagem *</label>
+                            <textarea id="updMessage" rows="2" required placeholder="Ex: Link restabelecido. MPLS A/B OK, 120@85 OK, 119@375 permanece OFF."></textarea>
                         </div>
                         <div id="updError" class="alert alert-error hidden span-2"></div>
-                        <div class="span-2" style="display:flex; justify-content:flex-end;">
-                            <button type="submit" class="btn btn-primary">Adicionar ao Histórico</button>
+                        <div class="span-2" style="display:flex; justify-content:space-between; align-items:center; gap:10px;">
+                            <input type="datetime-local" id="updEventAt" style="max-width:210px;" title="Data/Hora do evento">
+                            <button type="submit" class="btn btn-primary">Registrar Atualização</button>
                         </div>
                     </form>
                 </div>

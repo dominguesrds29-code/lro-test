@@ -147,40 +147,63 @@
             return;
         }
 
-        wrap.innerHTML = items.map((o) => {
-            const ticketBadge = o.ticket_externo
-                ? `<span class="badge badge-ticket">Ticket: ${escapeHtml(o.ticket_externo)}${o.operadora ? ' (' + escapeHtml(o.operadora) + ')' : ''}</span>`
-                : '';
-            const centroTxt = o.centro ? ` • ${escapeHtml(o.centro)}` : '';
-            const updTxt = Number(o.updates_count) > 0 ? `${o.updates_count} atualização(ões)` : 'Sem atualizações';
+        wrap.innerHTML = `
+            <div class="card book-table-card">
+                <div class="book-table-wrap">
+                    <table class="book-table">
+                        <thead>
+                            <tr>
+                                <th>Registro</th>
+                                <th>Início</th>
+                                <th>Localidade / Sistema</th>
+                                <th>Assunto / Ticket</th>
+                                <th>Status</th>
+                                <th>Duração</th>
+                                <th>Autor</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${items.map((o) => {
+                                const ticketTxt = o.ticket_externo
+                                    ? `<span class="badge badge-ticket" style="margin-left:6px;">Ticket ${escapeHtml(o.ticket_externo)}</span>`
+                                    : '';
+                                const updBadge = Number(o.updates_count) > 0
+                                    ? `<div class="book-sub">💬 ${o.updates_count} atualiz.</div>`
+                                    : '';
+                                return `
+                                    <tr data-occ-id="${o.id}">
+                                        <td>
+                                            <span class="badge badge-code">${escapeHtml(o.code)}</span>
+                                            <div class="book-sub"><span class="badge sev-${escapeHtml(o.severidade)}">${escapeHtml(o.severidade_label.split(' ')[0])}</span></div>
+                                        </td>
+                                        <td style="white-space:nowrap;">
+                                            <strong>${escapeHtml(o.opened_at_br)}</strong>
+                                            ${o.closed_at ? `<div class="book-sub">Fim: ${escapeHtml(o.closed_at_br)}</div>` : ''}
+                                        </td>
+                                        <td>
+                                            <strong>${escapeHtml(o.localidade)}</strong>${o.centro ? ` • ${escapeHtml(o.centro)}` : ''}
+                                            <div class="book-sub">${escapeHtml(o.sistema)}</div>
+                                        </td>
+                                        <td>
+                                            <strong>${escapeHtml(o.title)}</strong>${ticketTxt}
+                                        </td>
+                                        <td><span class="badge status-${escapeHtml(o.status)}">${escapeHtml(o.status_label)}</span></td>
+                                        <td style="white-space:nowrap;">${escapeHtml(o.duration_label)}</td>
+                                        <td>
+                                            <strong>${escapeHtml(o.creator_rank_name)}</strong>
+                                            ${updBadge}
+                                        </td>
+                                    </tr>
+                                `;
+                            }).join('')}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        `;
 
-            return `
-                <article class="occ-card" data-occ-id="${o.id}">
-                    <div class="occ-top">
-                        <div class="occ-badges">
-                            <span class="badge badge-code">${escapeHtml(o.code)}</span>
-                            <span class="badge status-${escapeHtml(o.status)}">${escapeHtml(o.status_label)}</span>
-                            <span class="badge sev-${escapeHtml(o.severidade)}">${escapeHtml(o.severidade_label)}</span>
-                            ${ticketBadge}
-                        </div>
-                        <div class="muted" style="margin:0; font-size:0.82rem;">
-                            Início: <strong>${escapeHtml(o.opened_at_br)}</strong> • Duração: <strong>${escapeHtml(o.duration_label)}</strong>
-                        </div>
-                    </div>
-                    <h3 class="occ-title">${escapeHtml(o.title)}</h3>
-                    <p class="occ-desc-preview">${escapeHtml(o.descricao)}</p>
-                    <div class="occ-meta-row">
-                        <span>📍 <strong>${escapeHtml(o.localidade)}</strong>${centroTxt}</span>
-                        <span>⚙️ Sistema: <strong>${escapeHtml(o.sistema)}</strong></span>
-                        <span>👤 Lançado por: <strong>${escapeHtml(o.creator_rank_name)}</strong></span>
-                        <span>💬 ${escapeHtml(updTxt)}</span>
-                    </div>
-                </article>
-            `;
-        }).join('');
-
-        $$('.occ-card').forEach((card) => {
-            card.addEventListener('click', () => openOccurrenceDetail(Number(card.dataset.occId)));
+        $$('.book-table tbody tr').forEach((row) => {
+            row.addEventListener('click', () => openOccurrenceDetail(Number(row.dataset.occId)));
         });
     }
 
@@ -196,26 +219,31 @@
         $('#detSevBadge').textContent = o.severidade_label;
         $('#detTitle').textContent = o.title;
 
-        const metaItems = [
-            ['Data/Hora Início', o.opened_at_br],
-            ['Data/Hora Término', o.closed_at_br],
-            ['Duração / Tempo', o.duration_label],
-            ['Localidade', o.localidade],
-            ['Centro / Estação', o.centro || '—'],
+        const metaPairs = [
+            ['Início', o.opened_at_br],
+            ['Término', o.closed_at_br],
+            ['Duração', o.duration_label],
+            ['Localidade', o.localidade + (o.centro ? ` (${o.centro})` : '')],
             ['Sistema', o.sistema],
-            ['Ticket / OS', o.ticket_externo ? `${o.ticket_externo} (${o.operadora || '—'})` : (o.operadora || '—')],
-            ['Responsável Abertura', o.creator_full_name],
-        ];
-        $('#detMetaGrid').innerHTML = metaItems.map(([k, v]) => `
-            <div class="meta-item">
-                <div class="meta-label">${escapeHtml(k)}</div>
-                <div class="meta-val">${escapeHtml(v)}</div>
-            </div>
-        `).join('');
+            o.ticket_externo ? ['Ticket/OS', o.ticket_externo + (o.operadora ? ` (${o.operadora})` : '')] : null,
+            ['Autor', o.creator_full_name],
+        ].filter(Boolean);
+
+        $('#detMetaGrid').innerHTML = metaPairs.map(([k, v]) =>
+            `<span><strong>${escapeHtml(k)}:</strong> ${escapeHtml(v)}</span>`
+        ).join('');
 
         $('#detDescricao').textContent = o.descricao || '—';
-        $('#detAcoes').textContent = o.acoes_preliminares || 'Nenhuma ação preliminar informada.';
-        $('#detImpacto').textContent = o.impacto_operacional || 'Não informado.';
+
+        const extraParts = [];
+        if (o.acoes_preliminares) extraParts.push(`Ações: ${o.acoes_preliminares}`);
+        if (o.impacto_operacional) extraParts.push(`Impacto: ${o.impacto_operacional}`);
+        if (extraParts.length) {
+            $('#detAcoes').textContent = extraParts.join('\n\n');
+            $('#detExtraWrap').classList.remove('hidden');
+        } else {
+            $('#detExtraWrap').classList.add('hidden');
+        }
 
         const timelineEl = $('#detTimeline');
         if (!o.updates || !o.updates.length) {
@@ -506,14 +534,10 @@
                         opened_at: $('#newOpenedAt').value,
                         severidade: $('#newSeveridade').value,
                         localidade: $('#newLocalidade').value,
-                        centro: $('#newCentro').value,
                         sistema: $('#newSistema').value,
                         status: $('#newStatus').value,
                         ticket_externo: $('#newTicket').value,
-                        operadora: $('#newOperadora').value,
                         descricao: $('#newDescricao').value,
-                        acoes_preliminares: $('#newAcoes').value,
-                        impacto_operacional: $('#newImpacto').value,
                     },
                 });
                 closeModal('modalNewOcc');

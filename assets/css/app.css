@@ -385,6 +385,70 @@ input:focus, select:focus, textarea:focus {
 
 .occ-meta-row strong { color: var(--slate-800); }
 
+/* TABELA OBJETIVA DO LIVRO */
+.book-table-card {
+    padding: 0;
+    overflow: hidden;
+}
+
+.book-table-wrap {
+    overflow-x: auto;
+}
+
+table.book-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+}
+
+table.book-table th {
+    background: var(--navy-900);
+    color: var(--white);
+    font-size: 0.76rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    padding: 10px 12px;
+    text-align: left;
+    white-space: nowrap;
+}
+
+table.book-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--slate-200);
+    vertical-align: middle;
+}
+
+table.book-table tbody tr {
+    cursor: pointer;
+    transition: background 0.12s;
+}
+
+table.book-table tbody tr:hover {
+    background: #eff6ff;
+}
+
+.book-sub {
+    font-size: 0.78rem;
+    color: var(--slate-600);
+    margin-top: 2px;
+}
+
+.detail-meta-compact {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 18px;
+    background: var(--slate-50);
+    border: 1px solid var(--slate-200);
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 0.85rem;
+    margin-bottom: 14px;
+}
+
+.detail-meta-compact span strong {
+    color: var(--navy-900);
+}
+
 /* BADGES */
 .badge {
     display: inline-flex;

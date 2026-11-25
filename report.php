@@ -262,12 +262,12 @@ $csvUrl = 'report.php?' . http_build_query($filters + ['format' => 'csv']);
         .occ-block-body { padding: 9px 11px; font-size: 9pt; }
         .occ-block-title { font-weight: 700; font-size: 9.8pt; color: #0b1b34; margin: 0 0 6px; }
         .occ-meta-line {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 4px 10px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px 16px;
             font-size: 8.3pt;
             background: #f8fafc;
-            padding: 6px 8px;
+            padding: 5px 8px;
             border: 1px solid #e2e8f0;
             margin-bottom: 8px;
         }
@@ -438,30 +438,23 @@ $csvUrl = 'report.php?' . http_build_query($filters + ['format' => 'csv']);
                 <div class="occ-block-body">
                     <div class="occ-block-title"><?= $esc($o['title']) ?></div>
                     <div class="occ-meta-line">
-                        <div><strong>Localidade:</strong> <?= $esc($o['localidade']) ?></div>
-                        <div><strong>Centro/Estação:</strong> <?= $esc($o['centro'] ?: '—') ?></div>
-                        <div><strong>Sistema:</strong> <?= $esc($o['sistema']) ?></div>
-                        <div><strong>Ticket Externo:</strong> <?= $esc($o['ticket_externo'] ?: '—') ?></div>
-                        <div><strong>Operadora/Terceiro:</strong> <?= $esc($o['operadora'] ?: '—') ?></div>
-                        <div><strong>Lançamento Inicial:</strong> <?= $esc($o['creator_full_name']) ?></div>
+                        <span><strong>Local:</strong> <?= $esc($o['localidade']) ?><?= $o['centro'] ? ' (' . $esc($o['centro']) . ')' : '' ?></span>
+                        <span><strong>Sistema:</strong> <?= $esc($o['sistema']) ?></span>
+                        <?php if ($o['ticket_externo'] !== ''): ?>
+                            <span><strong>Ticket:</strong> <?= $esc($o['ticket_externo']) ?><?= $o['operadora'] ? ' (' . $esc($o['operadora']) . ')' : '' ?></span>
+                        <?php endif; ?>
+                        <span><strong>Autor:</strong> <?= $esc($o['creator_full_name']) ?></span>
                     </div>
 
                     <div class="occ-field">
-                        <div class="occ-field-lbl">Descrição Técnica Inicial</div>
+                        <div class="occ-field-lbl">Relato Técnico</div>
                         <div class="occ-field-val"><?= $esc($o['descricao']) ?></div>
                     </div>
 
-                    <?php if ($o['acoes_preliminares'] !== ''): ?>
+                    <?php if ($o['acoes_preliminares'] !== '' || $o['impacto_operacional'] !== ''): ?>
                     <div class="occ-field">
-                        <div class="occ-field-lbl">Ações Preliminares / Testes Realizados</div>
-                        <div class="occ-field-val"><?= $esc($o['acoes_preliminares']) ?></div>
-                    </div>
-                    <?php endif; ?>
-
-                    <?php if ($o['impacto_operacional'] !== ''): ?>
-                    <div class="occ-field">
-                        <div class="occ-field-lbl">Impacto Operacional / Contingência</div>
-                        <div class="occ-field-val"><?= $esc($o['impacto_operacional']) ?></div>
+                        <div class="occ-field-lbl">Ações / Impacto</div>
+                        <div class="occ-field-val"><?= $esc(trim($o['acoes_preliminares'] . ($o['impacto_operacional'] ? "\nImpacto: " . $o['impacto_operacional'] : ''))) ?></div>
                     </div>
                     <?php endif; ?>
 
