@@ -1,0 +1,14 @@
+{
+  "name": "lro-st-dtceasj",
+  "version": "2.1.0",
+  "private": true,
+  "description": "Livro de Registro de Ocorrências da Seção Técnica (LRO-ST) - DTCEA-SJ",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "db:migrate": "wrangler d1 execute lro-st-db --remote --file=./migrations/0001_init.sql"
+  },
+  "devDependencies": {
+    "wrangler": "^4.168.0"
+  }
+}

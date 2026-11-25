@@ -1,0 +1,20 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "lro-st-dtceasj",
+  "main": "worker/index.js",
+  "compatibility_date": "2026-11-01",
+  "assets": {
+    "directory": "./public",
+    "binding": "ASSETS"
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "lro-st-db",
+      "database_id": "bf74347b-6f0e-49fc-8fad-a2047f03cbfa"
+    }
+  ],
+  "vars": {
+    "APP_TIMEZONE": "America/Sao_Paulo"
+  }
+}
