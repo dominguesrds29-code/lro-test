@@ -33,7 +33,7 @@ $user = current_user();
             <form id="loginForm" class="form-stack">
                 <div class="form-group">
                     <label for="loginUsername">Usuário (Nome de Guerra)</label>
-                    <input type="text" id="loginUsername" name="username" placeholder="Ex: domingues, glaudio, alex, michely,ramos" autocomplete="username" required>
+                    <input type="text" id="loginUsername" name="username" placeholder="Ex: domingues, glaudio, alex, michely, ramos" autocomplete="username" required>
                 </div>
                 <div class="form-group">
                     <label for="loginPassword">Senha</label>
@@ -44,7 +44,7 @@ $user = current_user();
             </form>
 
             <div class="login-hint">
-                <strong>Primeiro acesso da equipe ST:</strong> utilize seu nome de guerra em minúsculas (ex: <code>domingues</code>, <code>glaudio</code>, <code>alex</code>, <code>ramos</code>) e senha inicial <code>dtceasj</code>. Recomenda-se alterar a senha após o primeiro acesso.
+                <strong>Primeiro acesso da equipe ST:</strong> utilize seu nome de guerra em minúsculas (ex: <code>domingues</code>, <code>glaudio</code>, <code>alex</code>, <code>michely</code>, <code>ramos</code>) e senha inicial <code>dtceasj</code>. Recomenda-se alterar a senha após o primeiro acesso.
             </div>
         </div>
     </div>
