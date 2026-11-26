@@ -33,7 +33,7 @@ $user = current_user();
             <form id="loginForm" class="form-stack">
                 <div class="form-group">
                     <label for="loginUsername">Usuário (Nome de Guerra)</label>
-                    <input type="text" id="loginUsername" name="username" placeholder="Ex: domingues, glaudio, alex, ramos" autocomplete="username" required>
+                    <input type="text" id="loginUsername" name="username" placeholder="Ex: domingues, glaudio, alex, michely,ramos" autocomplete="username" required>
                 </div>
                 <div class="form-group">
                     <label for="loginPassword">Senha</label>
