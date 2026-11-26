@@ -12,6 +12,7 @@ $user = current_user();
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
     <title>LRO-ST | Livro de Registro de Ocorrências — DTCEA-SJ</title>
+    <link rel="icon" type="image/svg+xml" href="assets/img/logo-lro-st.svg">
     <link rel="stylesheet" href="assets/css/app.css">
 </head>
 <body>
@@ -20,10 +21,7 @@ $user = current_user();
         <div class="login-card">
             <div class="login-brand">
                 <div class="brand-crest" aria-hidden="true">
-                    <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M24 4L40 10V22C40 32.5 33.1 41.8 24 44C14.9 41.8 8 32.5 8 22V10L24 4Z" stroke="currentColor" stroke-width="2.5" fill="rgba(255,255,255,0.08)"/>
-                        <path d="M16 24L22 30L33 18" stroke="#60a5fa" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
+                    <img src="assets/img/logo-lro-st.svg" alt="Logo LRO-ST DTCEA-SJ" style="width:100%;height:100%;object-fit:contain;">
                 </div>
                 <div>
                     <div class="brand-org">COMANDO DA AERONÁUTICA • DECEA</div>
@@ -56,7 +54,7 @@ $user = current_user();
         <header class="topbar">
             <div class="topbar-inner">
                 <div class="topbar-brand">
-                    <div class="topbar-logo">ST</div>
+                    <div class="topbar-logo" style="background:transparent;padding:0;"><img src="assets/img/logo-lro-st.svg" alt="Logo LRO-ST" style="width:100%;height:100%;object-fit:contain;"></div>
                     <div>
                         <div class="topbar-title">LRO-ST • DTCEA-SJ</div>
                         <div class="topbar-sub">Livro de Ocorrências da Seção Técnica</div>

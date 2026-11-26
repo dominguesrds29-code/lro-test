@@ -148,10 +148,19 @@ $csvUrl = 'report.php?' . http_build_query($filters + ['format' => 'csv']);
             margin-bottom: 14px;
         }
         .doc-header-top {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
             text-align: center;
             border-bottom: 1px solid #cbd5e1;
             padding-bottom: 8px;
             margin-bottom: 10px;
+        }
+        .doc-logo {
+            width: 52px;
+            height: 52px;
+            flex-shrink: 0;
         }
         .org-line { font-size: 8.5pt; font-weight: 700; letter-spacing: 0.05em; color: #1e3a8a; }
         .unit-line { font-size: 11pt; font-weight: 800; color: #0b1b34; margin: 2px 0; }
@@ -340,9 +349,12 @@ $csvUrl = 'report.php?' . http_build_query($filters + ['format' => 'csv']);
     <div class="sheet">
         <header class="doc-header">
             <div class="doc-header-top">
-                <div class="org-line">MINISTÉRIO DA DEFESA • COMANDO DA AERONÁUTICA • DECEA</div>
-                <div class="unit-line">DESTACAMENTO DE CONTROLE DO ESPAÇO AÉREO DE SÃO JOSÉ DOS CAMPOS (DTCEA-SJ)</div>
-                <div class="doc-title">Relatório do Livro de Registro de Ocorrências — Seção Técnica (LRO-ST)</div>
+                <img src="assets/img/logo-lro-st.svg" alt="Logo LRO-ST" class="doc-logo">
+                <div>
+                    <div class="org-line">MINISTÉRIO DA DEFESA • COMANDO DA AERONÁUTICA • DECEA</div>
+                    <div class="unit-line">DESTACAMENTO DE CONTROLE DO ESPAÇO AÉREO DE SÃO JOSÉ DOS CAMPOS (DTCEA-SJ)</div>
+                    <div class="doc-title">Relatório do Livro de Registro de Ocorrências — Seção Técnica (LRO-ST)</div>
+                </div>
             </div>
             <div class="doc-meta-grid">
                 <div><strong>Período Apurado:</strong> <?= $esc($fmtDateBr($filters['date_from'])) ?> a <?= $esc($fmtDateBr($filters['date_to'])) ?></div>

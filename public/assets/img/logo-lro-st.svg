@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120" role="img" aria-label="Logo LRO-ST DTCEA-SJ">
+  <defs>
+    <linearGradient id="shieldGrad" x1="15%" y1="5%" x2="85%" y2="95%">
+      <stop offset="0%" stop-color="#1b3b6f"/>
+      <stop offset="55%" stop-color="#0f2547"/>
+      <stop offset="100%" stop-color="#081428"/>
+    </linearGradient>
+    <linearGradient id="wingGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="100%" stop-color="#2563eb"/>
+    </linearGradient>
+    <linearGradient id="goldRim" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#e2e8f0"/>
+      <stop offset="50%" stop-color="#94a3b8"/>
+      <stop offset="100%" stop-color="#cbd5e1"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Escudo principal -->
+  <path d="M60 6 L106 22 V56 C106 84 86 105 60 114 C34 105 14 84 14 56 V22 Z"
+        fill="url(#shieldGrad)" stroke="url(#goldRim)" stroke-width="3.5" stroke-linejoin="round"/>
+
+  <!-- Filete interno -->
+  <path d="M60 13 L99 26.5 V56 C99 80 82 98.5 60 106.5 C38 98.5 21 80 21 56 V26.5 Z"
+        fill="none" stroke="rgba(148, 163, 184, 0.28)" stroke-width="1.2"/>
+
+  <!-- Ondas de radar / enlace técnico no topo -->
+  <path d="M40 37 A26 26 0 0 1 80 37" fill="none" stroke="#38bdf8" stroke-width="2.6" stroke-linecap="round" opacity="0.85"/>
+  <path d="M47 43 A17 17 0 0 1 73 43" fill="none" stroke="#60a5fa" stroke-width="2.4" stroke-linecap="round" opacity="0.95"/>
+  <circle cx="60" cy="46" r="2.8" fill="#38bdf8"/>
+
+  <!-- Livro técnico estilizado + asa DECEA -->
+  <path d="M35 54 H57 C59 54 60 55 60 57 V83 C55 80 46 79 35 81 Z"
+        fill="rgba(255,255,255,0.12)" stroke="#e2e8f0" stroke-width="2" stroke-linejoin="round"/>
+  <path d="M85 54 H63 C61 54 60 55 60 57 V83 C65 80 74 79 85 81 Z"
+        fill="rgba(255,255,255,0.08)" stroke="#e2e8f0" stroke-width="2" stroke-linejoin="round"/>
+
+  <!-- Linhas de registro no livro -->
+  <line x1="40" y1="62" x2="54" y2="62" stroke="#93c5fd" stroke-width="2.2" stroke-linecap="round"/>
+  <line x1="40" y1="69" x2="54" y2="69" stroke="#93c5fd" stroke-width="2.2" stroke-linecap="round"/>
+  <line x1="40" y1="76" x2="50" y2="76" stroke="#93c5fd" stroke-width="2.2" stroke-linecap="round"/>
+
+  <!-- Check de conformidade / auditoria na página direita -->
+  <path d="M66 68 L71.5 73.5 L81 62" fill="none" stroke="#38bdf8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Sigla ST na base -->
+  <text x="60" y="99" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="800" letter-spacing="2" fill="#f8fafc">ST</text>
+</svg>

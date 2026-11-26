@@ -770,7 +770,8 @@ body { margin: 0; font-family: "Segoe UI", Arial, Helvetica, sans-serif; color: 
 .btn-back { background: rgba(255,255,255,0.14); color: #fff; }
 .sheet { max-width: 210mm; margin: 18px auto; background: #fff; padding: 16mm 14mm; box-shadow: 0 6px 25px rgba(0,0,0,0.14); }
 .doc-header { border: 1.5px solid #0b1b34; padding: 12px 14px; margin-bottom: 14px; }
-.doc-header-top { text-align: center; border-bottom: 1px solid #cbd5e1; padding-bottom: 8px; margin-bottom: 10px; }
+.doc-header-top { display: flex; align-items: center; justify-content: center; gap: 14px; text-align: center; border-bottom: 1px solid #cbd5e1; padding-bottom: 8px; margin-bottom: 10px; }
+.doc-logo { width: 52px; height: 52px; flex-shrink: 0; }
 .org-line { font-size: 8.5pt; font-weight: 700; letter-spacing: 0.05em; color: #1e3a8a; }
 .unit-line { font-size: 11pt; font-weight: 800; color: #0b1b34; margin: 2px 0; }
 .doc-title { font-size: 12pt; font-weight: 800; color: #0b1b34; margin: 4px 0 2px; text-transform: uppercase; }
@@ -821,9 +822,12 @@ table.synoptic tr:nth-child(even) td { background: #f8fafc; }
 <div class="sheet">
   <header class="doc-header">
     <div class="doc-header-top">
-      <div class="org-line">MINISTÉRIO DA DEFESA • COMANDO DA AERONÁUTICA • DECEA</div>
-      <div class="unit-line">DESTACAMENTO DE CONTROLE DO ESPAÇO AÉREO DE SÃO JOSÉ DOS CAMPOS (DTCEA-SJ)</div>
-      <div class="doc-title">Relatório do Livro de Registro de Ocorrências — Seção Técnica (LRO-ST)</div>
+      <img src="/assets/img/logo-lro-st.svg" alt="Logo LRO-ST" class="doc-logo">
+      <div>
+        <div class="org-line">MINISTÉRIO DA DEFESA • COMANDO DA AERONÁUTICA • DECEA</div>
+        <div class="unit-line">DESTACAMENTO DE CONTROLE DO ESPAÇO AÉREO DE SÃO JOSÉ DOS CAMPOS (DTCEA-SJ)</div>
+        <div class="doc-title">Relatório do Livro de Registro de Ocorrências — Seção Técnica (LRO-ST)</div>
+      </div>
     </div>
     <div class="doc-meta-grid">
       <div><strong>Período Apurado:</strong> ${esc(formatDateBr(filters.date_from))} a ${esc(formatDateBr(filters.date_to))}</div>
@@ -949,7 +953,9 @@ export default {
         ? 'text/css; charset=utf-8'
         : url.pathname.endsWith('.js')
           ? 'application/javascript; charset=utf-8'
-          : 'text/html; charset=utf-8';
+          : url.pathname.endsWith('.svg')
+            ? 'image/svg+xml'
+            : 'text/html; charset=utf-8';
       return new Response(content, { headers: { 'Content-Type': ct } });
     }
 
